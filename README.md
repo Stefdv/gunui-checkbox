@@ -62,7 +62,7 @@ Element | Demo | Type | Change | Observe | Available
 [gunui-checkbox](https://github.com/Stefdv/gunui-checkbox) | [demo](https://stefdv.github.io/gunui-checkbox/components/gunui-checkbox/demo/index.html)  | Boolean | :white_check_mark: | :white_check_mark: | :white_check_mark:
 gunui-toggle | | Boolean | :white_check_mark: | :white_check_mark: | :soon:
 [gunui-progress](https://github.com/Stefdv/gunui-progress) | [demo](https://stefdv.github.io/gunui-progress/components/gunui-progress/demo/index.html) | Numeric | :black_square_button: | :white_check_mark: | :white_check_mark:
-[gunui-checkbox](https://github.com/Stefdv/gunui-checkbox)|[demo](https://stefdv.github.io/gunui-checkbox/components/gunui-checkbox/demo/index.html) | Numeric | :white_check_mark: | :white_check_mark: | :white_check_mark:
+[gunui-slider](https://github.com/Stefdv/gunui-slider)|[demo](https://stefdv.github.io/gunui-slider/components/gunui-slider/demo/index.html) | Numeric | :white_check_mark: | :white_check_mark: | :white_check_mark:
 gunui-input | | Numeric / String | :white_check_mark: | :white_check_mark: | :soon:
 gunui-textfield | | String | :white_check_mark: | :white_check_mark: | :soon:
 
