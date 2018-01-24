@@ -56,15 +56,15 @@ Now you are ready to start building great apps with Gun but without having to wr
 ### Demos
 If you don't fully understand the purpose of gunui take a look at some of the GunUi elements.
 #### Property Elements
-Element | Type | Change | Observe | Available
------------------------ | ------- | ---- | ---- | ----
-[gunui-button](https://stefdv.github.io/gunui-button/components/gunui-button/demo/index.html)| Boolean | :white_check_mark: | :white_check_mark: | :white_check_mark:
-[gunui-checkbox](https://stefdv.github.io/gunui-checkbox/components/gunui-checkbox/demo/index.html)  | Boolean | :white_check_mark: | :white_check_mark: | :white_check_mark:
-gunui-toggle | Boolean | :white_check_mark: | :white_check_mark: | :soon:
-[gunui-progress](https://stefdv.github.io/gunui-progress/components/gunui-progress/demo/index.html) | Numeric | :black_square_button: | :white_check_mark: | :white_check_mark:
-[gunui-checkbox](https://stefdv.github.io/gunui-checkbox/components/gunui-checkbox/demo/index.html) | Numeric | :white_check_mark: | :white_check_mark: | :white_check_mark:
-gunui-input | Numeric / String | :white_check_mark: | :white_check_mark: | :soon:
-gunui-textfield | String | :white_check_mark: | :white_check_mark: | :soon:
+Element | Demo | Type | Change | Observe | Available
+----------- | ------------ | ------- | ---- | ---- | ----
+[gunui-button](https://github.com/Stefdv/gunui-button) | [demo](https://stefdv.github.io/gunui-button/components/gunui-button/demo/index.html)| Boolean | :white_check_mark: | :white_check_mark: | :white_check_mark:
+[gunui-checkbox](https://github.com/Stefdv/gunui-checkbox) | [demo](https://stefdv.github.io/gunui-checkbox/components/gunui-checkbox/demo/index.html)  | Boolean | :white_check_mark: | :white_check_mark: | :white_check_mark:
+gunui-toggle | | Boolean | :white_check_mark: | :white_check_mark: | :soon:
+[gunui-progress](https://github.com/Stefdv/gunui-progress) | [demo](https://stefdv.github.io/gunui-progress/components/gunui-progress/demo/index.html) | Numeric | :black_square_button: | :white_check_mark: | :white_check_mark:
+[gunui-checkbox](https://github.com/Stefdv/gunui-checkbox)|[demo](https://stefdv.github.io/gunui-checkbox/components/gunui-checkbox/demo/index.html) | Numeric | :white_check_mark: | :white_check_mark: | :white_check_mark:
+gunui-input | | Numeric / String | :white_check_mark: | :white_check_mark: | :soon:
+gunui-textfield | | String | :white_check_mark: | :white_check_mark: | :soon:
 
 
 #### Contact
