@@ -1,0 +1,257 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, minimum-scale=1, initial-scale=1, user-scalable=yes">
+
+    <title>gunui-checkbox demo</title>
+
+    <script src="../../webcomponentsjs/webcomponents-lite.js"></script>
+    <link rel="import" href="../../gunui-base/gunui-base.html">
+    <link rel="import" href="../../iron-demo-helpers/demo-pages-shared-styles.html">
+    <link rel="import" href="../../iron-icon/iron-icon.html">
+    <link rel="import" href="../../paper-styles/color.html">
+    <link rel="import" href="../../paper-styles/shadow.html">
+    <link rel="import" href="helpers.html">
+    <link rel="import" href="gp-icons.html">
+    <link rel="import" href="../gunui-checkbox.html">
+
+    <custom-style>
+      <style is="custom-style" include="demo-pages-shared-styles">
+      body {
+        font-size: 18px;
+        line-height:1.5;
+      }
+      .centered {
+        max-width:800px;
+      }
+      .vertical-section {
+        background-color: white;
+        padding: 24px;
+        margin: 0 24px 24px 24px;
+        border-radius: 0.5rem;
+        @apply(--shadow-elevation-2dp);
+      }
+
+      a {margin:0 3px;text-decoration: none;}
+      .info {
+        font-size:larger;
+        --iron-icon-width:32px;
+        --iron-icon-height:32px;
+      }
+      gunui-checkbox {
+        display: block;
+        margin-right: 24px;
+      }
+      p > span {
+          color: #690;
+          font-family: monospace;
+          font-weight: 800;
+        }
+      .row {
+       display: flex;
+       flex-wrap:wrap;
+
+      }
+      h3 {
+        margin-bottom:0;
+      }
+      h3 iron-icon {
+        margin-right:4px;
+        width:48px;height:48px;
+      }
+      .note {
+        border: 2px groove #d0cfcf6e;
+    padding: 18px;
+    text-align: center;
+      }
+      .thatsit {
+        margin:0;
+        color:steelblue;
+        font-size:larger;
+      }
+      </style>
+    </custom-style>
+  </head>
+  <body>
+
+    <gunui-base></gunui-base>
+
+    <div class="vertical-section-container centered">
+
+
+        <h3><iron-icon icon="my-guns:gunui"></iron-icon>- CHECKBOX</h3>
+        <ul>
+          <li>A Gun wrapper around Polymers <a href="https://www.webcomponents.org/element/PolymerElements/paper-checkbox/elements/paper-checkbox" target="_blank">paper-checkbox</a></li>
+          <li>controls a boolean ( true/false ) property in your data</li>
+          <li>state is in sync with your data in Gun</li>
+        </ul>
+
+        <h3>Data-Point</h3>
+        <p>A 'data-point' is a property somewhere in your gun-data. Suppose you have data like this</p>
+        <demo-box no-render>
+          <template>
+          { lights:{
+              livingroom:{
+                tv_right: { active:true , brightness: 50},
+                shelf_right: {active:false,brightness: 75}
+              },
+              hall:{
+                ceiling: { active:false , brightness: 100}
+              }}}
+          </template>
+        </demo-box>
+        <p>You can link a `gunui-checkbox` to "<prism-demo inline code="lights.livingroom.tv_right"></prism-demo>" by adding the attributes <span>soul="lights"</span> and <span>prop="livingroom.tv_right"</span>, the checkbox will control <prism-demo inline code="{checked:true} or {checked:false}"></prism-demo></p>
+
+        <p class="note">
+            NOTE:If the checkboxes don't work please reload the page! I'm loading Gun from a cdn for this demo and sometimes it loads to slow
+        </p> 
+        <demo-box>
+          <template>
+          <div class="row">
+            <gunui-checkbox soul="lights" prop="livingroom.tv_right">tv right</gunui-checkbox>
+            <gunui-checkbox soul="lights" prop="hall.ceiling">Hall ceiling</gunui-checkbox>
+          </div>
+          </template>
+        </demo-box>
+
+        <p>Change the checkbox state and reload the browser...the checkbox should keep the state you set on it</p>
+
+      <h3>Gun Aware</h3>
+      <p>What if somebody else switched the light on/off ? It would be better if the checkbox was aware of the current state 
+      The buttons below are pointing to the same <span>soul</span> and <span>prop</span>, but now there's also the attribute <span>subscribe</span>.</p>
+      <p>Press one of the buttons in the previous example and watch what happens to the buttons in this example.</p>
+
+        <demo-box class="centered-demo">
+          <template>
+           <div class="row">
+            <gunui-checkbox soul="lights" prop="livingroom.tv_right" subscribe>tv right</gunui-checkbox>
+            <gunui-checkbox soul="lights" prop="hall.ceiling" subscribe>Hall ceiling</gunui-checkbox>
+          </div>
+          </template>
+        </demo-box>
+
+     <h3>Custom key</h3>
+     <p>Default the Boolean will be stored under the key 'checked', but most of the times your boolean will have another key than 'checked', like with Philips HUE lighting. ( that uses <span>lights.1.state.on</span>)</p>
+     <p>Just add the attribute <span>key="on"</span> and the data will be stored as  "<prism-demo inline code="{on:true}"></prism-demo>"</p>
+
+      <demo-box class="centered-demo">
+        <template>
+         <div class="row">
+         <gunui-checkbox soul="hue" prop="lights.1.state" key="on" subscribe>tv right</gunui-checkbox>
+         <gunui-checkbox soul="hue" prop="lights.1.state" key="on" subscribe>tv right</gunui-checkbox>
+        </div>
+        </template>
+      </demo-box>
+      <p class="thatsit">That's it! No javascript !<br>You now have a checkbox that controls a boolean property in your Gun data</p>
+
+
+    <div class="note">
+      Styling stuff below, nothing gun related.
+    </div>
+
+     <h3>Checkboxes can be checked or unchecked, or disabled entirely</h3>
+      <demo-box class="centered-demo">
+        <template>
+         <div class="row">
+          <gunui-checkbox>Checkbox</gunui-checkbox>
+          <gunui-checkbox checked>Checkbox</gunui-checkbox>
+          <gunui-checkbox disabled>Disabled</gunui-checkbox>
+        </div>
+        </template>
+      </demo-box>
+
+      <h3>Checkboxes can hide the ripple effect using the <i>noink</i> attribute</h3>
+      <demo-box class="centered-demo">
+        <template>
+          <gunui-checkbox noink>Checkbox</gunui-checkbox>
+        </template>
+      </demo-box>
+
+      <h3>Checkboxes can be styled using custom properties</h3>
+      <demo-box class="centered-demo small-text">
+        <template>
+          <div class="row">
+
+            <gunui-checkbox class="red">Checkbox
+              <span class="subtitle">With a subtitle</span>
+            </gunui-checkbox>
+            <gunui-checkbox checked class="green">Checkbox
+              <span class="subtitle">
+                With a longer subtitle that wraps to another line
+              </span>
+            </gunui-checkbox>
+            <gunui-checkbox checked class="silver">Checkbox
+              <span class="subtitle">
+                Or you go totally crazy with a lot of styling.
+              </span>
+            </gunui-checkbox>
+            <gunui-checkbox class="blue">Checkbox</gunui-checkbox>
+          </div>
+            <custom-style>
+            <style is="custom-style">
+              gunui-checkbox.red {
+                --gunui-checkbox-size: 2em;
+                --gunui-checkbox-checked-color: var(--paper-red-500);
+                --gunui-checkbox-checked-ink-color: var(--paper-red-500);
+                --gunui-checkbox-unchecked-color: var(--paper-red-900);
+                --gunui-checkbox-unchecked-ink-color: var(--paper-red-900);
+                --gunui-checkbox-label-color: var(--paper-red-500);
+                --gunui-checkbox-vertical-align: top;
+              }
+
+              gunui-checkbox.green {
+                align-self: center;
+                border: 1px solid var(--paper-green-200);
+                padding: 8px 16px;
+
+                --gunui-checkbox-checked-color: var(--paper-green-500);
+                --gunui-checkbox-checked-ink-color: var(--paper-green-500);
+                --gunui-checkbox-unchecked-color: var(--paper-green-900);
+                --gunui-checkbox-unchecked-ink-color: var(--paper-green-900);
+                --gunui-checkbox-label-color: var(--paper-green-500);
+                --gunui-checkbox-label-spacing: 0;
+                --gunui-checkbox-margin: 8px 16px 8px 0;
+                --gunui-checkbox-vertical-align: top;
+              }
+
+              gunui-checkbox.blue {
+                --gunui-checkbox-checked-color: var(--paper-blue-500);
+                --gunui-checkbox-checked-ink-color: var(--paper-blue-500);
+                --gunui-checkbox-unchecked-color: var(--paper-blue-900);
+                --gunui-checkbox-unchecked-ink-color: var(--paper-blue-900);
+                --gunui-checkbox-label-color: var(--paper-blue-500);
+                --gunui-checkbox-label-checked-color: var(--paper-blue-900);
+              }
+
+              gunui-checkbox.silver {
+                background: rgb(245,246,246); /* Old browsers */
+                background: -moz-linear-gradient(-45deg, rgba(245,246,246,1) 0%, rgba(219,220,226,1) 21%, rgba(184,186,198,1) 49%, rgba(221,223,227,1) 80%, rgba(245,246,246,1) 100%); /* FF3.6-15 */
+                background: -webkit-linear-gradient(-45deg, rgba(245,246,246,1) 0%,rgba(219,220,226,1) 21%,rgba(184,186,198,1) 49%,rgba(221,223,227,1) 80%,rgba(245,246,246,1) 100%); /* Chrome10-25,Safari5.1-6 */
+                background: linear-gradient(135deg, rgba(245,246,246,1) 0%,rgba(219,220,226,1) 21%,rgba(184,186,198,1) 49%,rgba(221,223,227,1) 80%,rgba(245,246,246,1) 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+                filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#f5f6f6', endColorstr='#f5f6f6',GradientType=1 ); /* IE6-9 fallback on horizontal gradient */
+                border:1px solid silver;
+                --gunui-checkbox-checked-color: silver;
+                --gunui-checkbox-unchecked-color:silver;
+                @apply(--shadow-elevation-3dp);
+                padding:5px;
+                --gunui-checkbox-label-color:black;
+
+              }
+              gunui-checkbox .subtitle {
+                display: block;
+                font-size: 0.8em;
+                margin-top: 2px;
+                max-width: 150px;
+              }
+            </style>
+          </custom-style>
+        </template>
+      </demo-box>
+
+  </div>
+  <script>
+
+  </script>
+  </body>
+</html>

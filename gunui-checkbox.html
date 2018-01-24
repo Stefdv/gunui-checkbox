@@ -1,0 +1,144 @@
+<link rel="import" href="../polymer/polymer-element.html">
+<link rel="import" href="../paper-checkbox/paper-checkbox.html">
+<link rel="import" href="../gunui-base/gunui-mixin-api.html">
+<dom-module id="gunui-checkbox">
+  <template>
+    <style>
+      :host {
+         display:inline-block;
+      }
+      paper-checkbox {
+        --paper-checkbox-unchecked-background-color:var(--gunui-checkbox-unchecked-background-color);
+        --paper-checkbox-unchecked-color:var(--gunui-checkbox-unchecked-color);
+        --paper-checkbox-unchecked-ink-color:var(--gunui-checkbox-unchecked-ink-color);
+        --paper-checkbox-checked-color:var(--gunui-checkbox-checked-color);
+        --paper-checkbox-checked-ink-color:var(--gunui-checkbox-checked-ink-color);
+        --paper-checkbox-checkmark-color:var(--gunui-checkbox-checkmark-color);
+        --paper-checkbox-label-color:var(--gunui-checkbox-label-color);
+        --paper-checkbox-label-checked-color:var(--gunui-checkbox-label-checked-color);
+        --paper-checkbox-label-spacing:var(--gunui-checkbox-label-spacing);
+        --paper-checkbox-error-color:var(--gunui-checkbox-error-color);
+        --paper-checkbox-size:var(--gunui-checkbox-size);
+        --paper-checkbox-ink-size:var(--gunui-checkbox-ink-size);
+        --paper-checkbox-margin:var(--gunui-checkbox-margin);
+        --paper-checkbox-vertical-align:var(--gunui-checkbox-vertical-align);
+        @apply --gunui-checkbox-label;
+        @apply --gunui-checkbox-labell-checked;
+      }
+
+    </style>
+    <paper-checkbox
+      id="checkbox"
+      checked="{{checked}}"
+      noink="[[noink]]"
+      disabled="[[disabled]]"
+      on-tap="_localAction">
+      <slot></slot>
+    </paper-checkbox>
+  </template>
+
+  <script>
+    if (!Polymer.Element) {
+        throw new Error(`Unexpected Polymer version ${Polymer.version}, expected v2.0.0 or later.`);
+       }
+    /**
+     * `gunui-checkbox`
+     * A checkbox linked to a Boolean value in your Gun Data 
+     *
+     * @customElement
+     * @polymer
+     * @demo demo/index.html
+     */
+    class GunuiCheckbox extends GunUi.MixinAPI(Polymer.Element) {
+
+      static get is() { return 'gunui-checkbox'; }
+      static get properties() {
+        return {
+          /**
+           * default 'active' -> {active:true}
+           * You might need something like 'state:true' or 'valid:true' 
+           * @type {String}
+           */
+          key:{
+            type:String,
+            value:'checked'
+          },
+          /**
+           * disable the ink effect
+           * @type {Boolean}
+           */
+          noink:Boolean,
+          /**
+           * Disable the button
+           * @type {Boolean}
+           */
+          disabled:Boolean,
+          /**
+           * the user changed the state, not Gun
+           * @type {Boolean}
+           */
+          _isLocal:Boolean,
+            /**
+           * checked state of the button
+           * Note that if you set it thru javascript, the state will change in Gun
+           * @type {Boolean}
+           */
+          checked:{
+            type:Boolean,
+            reflectToAttribute:true,
+            notify:true,
+            observer:'_checkedChanged' 
+          },
+
+        };
+      }
+
+      hasGun() {
+        if(this.soul) { // at least give me that !
+          this._hasGun && this.subscribe ? this._subscribe() : this._getInitialData();
+        } else {
+          GunUi.config.dev && console.info('You did not provide a soul!')
+        }
+      }
+
+      /**
+       * If the user changed the state we have to know
+       */
+      _localAction(e) {
+        this._fromGun = false;
+      }
+
+       /**
+       * only store it in Gun if it was a local action
+       */
+      _checkedChanged(checked) {
+        if(this._hasGun && !this._fromGun) {
+          !this._fromGun && this.soul &&  GunUi.gun.get(this.soul).path(this.prop+'.' + this.key).put(checked);
+       
+        }
+      
+      }
+
+      _getInitialData() {
+
+        GunUi.gun.get(this.soul).path(this.prop+'.'+this.key).val(data=>{
+          if(data) {
+            this._fromGun=true;
+            this.checked= data[this.key] || data
+          }
+        })
+      }
+
+      _subscribe(){
+         GunUi.gun.get(this.soul).path(this.prop+'.'+this.key).on(data=>{
+            this._fromGun=true;
+            this.checked= data[this.key] || data;
+          })
+        }
+
+
+    }
+
+    window.customElements.define(GunuiCheckbox.is, GunuiCheckbox);
+  </script>
+</dom-module>
